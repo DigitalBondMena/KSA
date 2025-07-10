@@ -1,0 +1,183 @@
+
+<body class="">
+
+    <!-- <body data-layout="horizontal"> -->
+        <title>Ksa Student || Dashboard</title>
+
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            
+            <app-header></app-header>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content ">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                       
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h4 class="card-title">Entrepreneurship Page</h4>
+                                        <!-- <div class=""> 
+                                            <button class="btn btnbebe mt-2" (click)="no()"  data-bs-toggle="modal" data-bs-target="#add"   aria-hidden="true">Blog Images</button>
+                                        </div> -->
+                                    </div>
+                                    <div class="card-body"> 
+                                     
+
+                                      
+                                       
+
+                                        <div *ngIf="showAddMSG" class="alert alert-success" role="alert" >
+                                            Data added successfully
+                                        </div>
+    
+                                        <div *ngIf="showUpdateMSG" class="alert alert-success" role="alert">
+                                            Data updated successfully
+                                        </div>
+
+                                        <div *ngIf="deleteMSG" class="alert alert-success" role="alert">
+                                            Data disabled successfully
+                                        </div>
+    
+                                        <div *ngIf="recoveryMSG" class="alert alert-success" role="alert">
+                                            Data activated successfully
+                                        </div>                                        
+    
+        
+                                      
+                                        <div class="w-100  spinner d-flex justify-content-center align-items-center " *ngIf="loadingU">
+                                            <app-spinner></app-spinner>
+                                        </div>
+                                        <div *ngIf="showTryMSG" style="position: static !important;" class="alert alert-danger text-center" role="alert">
+                                            Please try again
+                                        </div>
+                                        <form class="row g-3" [formGroup]="newData" *ngIf="!loadingU">
+                    
+                                            <div *ngIf="wrongData" class="alert alert-danger text-center" role="alert">
+                                                Data invalid
+                                            </div>
+                    
+                                            <div class="col-md-12">
+                                              <label for=""   class="form-label">Title</label>
+                                              <input type="text" (keydown)="handleKeydown($event)" class="form-control " [class.is-valid]="newData.controls.ar_title.status == 'VALID'" 
+                                              [class.is-invalid]="newData.controls.ar_title.status == 'INVALID' && newData.controls.ar_title.touched"
+                                               formControlName="ar_title" [value]="ShowAarry?.ar_title"  id="" value="" required>
+                                          
+                                            </div>
+                    
+                                            <div id="" class="text-danger col-md-12 fs-6 " role="alert">
+                                                <span  *ngIf="newData.controls.ar_title.errors?.['maxlength']"> Title must contain no more than 90 characters</span>
+                                            </div>
+                                            
+
+                                            
+                                            <div class="col-md-12">
+                                                <label for="validationServer03" class="form-label">  Introduction  </label>
+                                                <textarea type="text" class="form-control"[class.is-valid]="newData.controls.ar_intro.status == 'VALID'" 
+                                                [class.is-invalid]="newData.controls.ar_intro.status == 'INVALID' && newData.controls.ar_intro.touched" 
+                                                    formControlName="ar_intro" [value]="ShowAarry?.ar_intro"  id="validationServer03" value="" required ></textarea>
+
+                                            </div>
+  
+                                            <div id="" class="text-danger col-md-12 fs-6 " role="alert">
+                                                <span  *ngIf="newData.controls.ar_intro.errors?.['maxlength']"> Title must contain no more than 320 characters</span>
+                                            </div>
+                    
+                                            <div class="col-md-12">
+                                                <label for="validationServer03" class="form-label"> Description</label>
+                                            
+                                                    <ckeditor lang="ar"  [config]="{ contentsLangDirection : 'rtl' }" data="<p>{{ShowAarry?.ar_text}}</p>" class="form-control rtl-content"
+                                                    [class.is-valid]="newData.controls.ar_text.status == 'VALID'" 
+                                                    [class.is-invalid]="newData.controls.ar_text.status == 'INVALID' && newData.controls.ar_text.touched" 
+                                                    formControlName="ar_text"     id="validationServer03" value="" required ></ckeditor>
+                                                
+                                            </div>
+                        
+                                                 
+                                           
+                                        
+     
+                    
+                                               
+                                            <div class="col-md-6">
+                                                <label for="validationServer04" class="form-label">Meta Title</label>
+                                                <textarea type="text" class="form-control " [class.is-valid]="newData.controls.ar_tag_title.status == 'VALID'" 
+                                                [class.is-invalid]="newData.controls.ar_tag_title.status == 'INVALID' && newData.controls.ar_tag_title.touched" 
+                                                 formControlName="ar_tag_title" [value]="ShowAarry?.ar_tag_title" id="validationServer04" value="" required></textarea>
+                                            </div>
+                    
+                                              <div class="col-md-6">
+                                                <label for="validationServer04" class="form-label">Meta Description </label>
+                                                <textarea type="text" class="form-control " [class.is-valid]="newData.controls.ar_tag_text.status == 'VALID'" 
+                                                [class.is-invalid]="newData.controls.ar_tag_text.status == 'INVALID' && newData.controls.ar_tag_text.touched" 
+                                                 formControlName="ar_tag_text" [value]="ShowAarry?.ar_tag_text" id="validationServer04" value="" required></textarea>
+                                            </div>
+                    
+                                              
+                                                                      
+                    
+                                                
+                                            <div class="mb-3 col-md-6">
+                                                <label for="formFile" class="form-label">Choose Image</label>
+                                                <input class="form-control" type="file"  accept="image/*"  formControlName="main_img"
+                                                [class.is-valid]="newData.controls.main_img.status == 'VALID'" 
+                                                [class.is-invalid]="newData.controls.main_img.status == 'INVALID' && newData.controls.main_img.touched" 
+                                                 (change)="image($event)"  [value]="ShowAarry?.main_img" >
+                                            </div>
+                                            
+                    
+                                            <div class="mb-3 col-md-6 ">
+                                                <img style="width:50px; height: 50px; margin-top: 25px;" class="imgshow"  src="{{imageSrc+ShowAarry?.main_img}}" alt="">
+                                            </div>
+                    
+                                           
+                                            
+
+                                           <button type="button" (click)="updateData(formData ,show_id )" class="btn btnbebe"> Update </button>
+                                                                      
+                    
+                                           
+                                          </form>     
+
+                                      
+        
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                        
+                    </div> <!-- container-fluid -->
+
+                  
+                </div>
+                <!-- End Page-content -->
+        
+               
+
+            <!-- <button  id="FixedDash" routerLink="/Home/en"   class="btn btnbebe ">Back To Home </button> -->
+                
+                <app-footer></app-footer>
+            </div>
+            <!-- end main content-->
+
+                
+
+        </div>
+        <!-- END layout-wrapper -->
+
+    
+      
+       
+
+     
+
+</body>

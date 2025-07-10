@@ -1,0 +1,479 @@
+<body class="">
+  <!-- <body data-layout="horizontal"> -->
+  <title>Ksa Student || Dashboard</title>
+
+  <!-- Begin page -->
+  <div id="layout-wrapper">
+    <app-header></app-header>
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+      <div class="page-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div
+                  class="card-header d-flex justify-content-between align-items-center"
+                >
+                  <h4 class="card-title">Add blog Page</h4>
+                </div>
+                <div class="card-body">
+                  <div
+                    *ngIf="showAddMSG"
+                    class="alert alert-success"
+                    role="alert"
+                  >
+                    Data added successfully
+                  </div>
+
+                  <div
+                    *ngIf="showUpdateMSG"
+                    class="alert alert-success"
+                    role="alert"
+                  >
+                    Data updated successfully
+                  </div>
+
+                  <div
+                    *ngIf="deleteMSG"
+                    class="alert alert-success"
+                    role="alert"
+                  >
+                    Data disabled successfully
+                  </div>
+
+                  <div
+                    *ngIf="recoveryMSG"
+                    class="alert alert-success"
+                    role="alert"
+                  >
+                    Data activated successfully
+                  </div>
+
+                  <div
+                    class="w-100 spinner d-flex justify-content-center align-items-center"
+                    style="min-height: 550px"
+                    *ngIf="loadingA"
+                  >
+                    <app-spinner></app-spinner>
+                  </div>
+                  <div
+                    *ngIf="showTryMSG"
+                    style="position: static !important"
+                    class="alert alert-danger text-center"
+                    role="alert"
+                  >
+                    Please try again
+                  </div>
+                  <form class="row g-3" [formGroup]="newData" *ngIf="!loadingA">
+                    <div class="col-md-12">
+                      <label for="" class="form-label">Title</label>
+                      <input
+                        type="text"
+                        (keydown)="handleKeydown($event)"
+                        [(ngModel)]="titleVlaue"
+                        class="form-control"
+                        [class.is-valid]="
+                          newData.controls.ar_title.status == 'VALID'
+                        "
+                        [class.is-invalid]="
+                          newData.controls.ar_title.status == 'INVALID' &&
+                          newData.controls.ar_title.touched
+                        "
+                        formControlName="ar_title"
+                        id=""
+                        value=""
+                        required
+                      />
+                    </div>
+
+                    <div id="" class="text-black col-md-12 fs-6" role="alert">
+                      Total characters :
+                      <span> {{ titleVlaue?.length || 0 }}</span>
+                    </div>
+
+                    <div id="" class="text-danger col-md-12 fs-6" role="alert">
+                      <span
+                        *ngIf="newData.controls.ar_title.errors?.['maxlength']"
+                      >
+                        Title must contain no more than 90 characters</span
+                      >
+                    </div>
+
+                    <div class="col-md-12">
+                      <label for="validationServer03" class="form-label">
+                        Blog Introduction
+                      </label>
+                      <textarea
+                        type="text"
+                        class="form-control"
+                        [class.is-valid]="
+                          newData.controls.ar_intro.status == 'VALID'
+                        "
+                        [class.is-invalid]="
+                          newData.controls.ar_intro.status == 'INVALID' &&
+                          newData.controls.ar_intro.touched
+                        "
+                        formControlName="ar_intro"
+                        id="validationServer03"
+                        value=""
+                        required
+                      ></textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                      <label for="validationServer03" class="form-label"
+                        >Blog Description</label
+                      >
+
+                      <ckeditor
+                        lang="en"
+                        [config]="{ contentsLangDirection: 'rtl' }"
+                        data=""
+                        class="form-control rtl-content"
+                        [class.is-valid]="
+                          newData.controls.ar_text.status == 'VALID'
+                        "
+                        [class.is-invalid]="
+                          newData.controls.ar_text.status == 'INVALID' &&
+                          newData.controls.ar_text.touched
+                        "
+                        formControlName="ar_text"
+                        id="validationServer03"
+                        value=""
+                        required
+                      ></ckeditor>
+                    </div>
+
+                    <div id="" class="text-danger col-md-12 fs-6" role="alert">
+                      <span
+                        *ngIf="newData.controls.ar_intro.errors?.['maxlength']"
+                      >
+                        Title must contain no more than 320 characters</span
+                      >
+                    </div>
+
+                    <div class="col-md-12">
+                      <label for="validationServer03" class="form-label">
+                        Blog Script
+                      </label>
+                      <textarea
+                        type="text"
+                        class="form-control"
+                        [class.is-valid]="
+                          newData.controls.blog_script.status == 'VALID'
+                        "
+                        [class.is-invalid]="
+                          newData.controls.blog_script.status == 'INVALID' &&
+                          newData.controls.blog_script.touched
+                        "
+                        formControlName="blog_script"
+                        id="validationServer03"
+                        value=""
+                        required
+                      ></textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                      <label for="validationServer04" class="form-label">
+                        Blog Script Second
+                      </label>
+                      <textarea
+                        type="text"
+                        class="form-control"
+                        [class.is-valid]="
+                          newData.controls.blog_script_second.status == 'VALID'
+                        "
+                        [class.is-invalid]="
+                          newData.controls.blog_script_second.status ==
+                            'INVALID' &&
+                          newData.controls.blog_script_second.touched
+                        "
+                        formControlName="blog_script_second"
+                        id="validationServer04"
+                        value=""
+                        required
+                      ></textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                      <label for="validationServer04" class="form-label"
+                        >Blog Category
+                      </label>
+                      <select
+                        class="form-control"
+                        [(ngModel)]="selectedCategoryIdADD"
+                        (ngModelChange)="onCategoryChangeADD()"
+                        [class.is-invalid]="
+                          newData.controls.blog_category_id.status ==
+                            'INVALID' &&
+                          newData.controls.blog_category_id.touched
+                        "
+                        formControlName="blog_category_id"
+                      >
+                        <option value="" selected disabled>اختر</option>
+                        <option
+                          *ngFor="let category of CategoryAarry"
+                          value="{{ category.id }}"
+                          (click)="getSubForAdd(category.ar_title)"
+                        >
+                          {{ category.ar_title }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-12" *ngIf="noSubADD">
+                      <label for="validationServer04" class="form-label"
+                        >Blog Subcategory
+                      </label>
+                      <select
+                        class="form-control"
+                        [class.is-valid]="
+                          newData.controls.blog_sub_category_id.status ==
+                          'VALID'
+                        "
+                        [class.is-invalid]="
+                          newData.controls.blog_sub_category_id.status ==
+                            'INVALID' &&
+                          newData.controls.blog_sub_category_id.touched
+                        "
+                        formControlName="blog_sub_category_id"
+                      >
+                        <option
+                          *ngFor="let Subcategory of CategoryFilterBySubForADD"
+                          value="{{ Subcategory.id }}"
+                        >
+                          {{ Subcategory.ar_title }}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="validationServer04" class="form-label"
+                        >Meta Title</label
+                      >
+                      <textarea
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="titleMetaVlaue"
+                        [class.is-valid]="
+                          newData.controls.ar_tag_title.status == 'VALID'
+                        "
+                        [class.is-invalid]="
+                          newData.controls.ar_tag_title.status == 'INVALID' &&
+                          newData.controls.ar_tag_title.touched
+                        "
+                        formControlName="ar_tag_title"
+                        value=""
+                        required
+                      ></textarea>
+
+                      <div id="" class="text-black col-md-12 fs-6" role="alert">
+                        Total characters :
+                        <span> {{ titleMetaVlaue?.length || 0 }}</span>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="validationServer04" class="form-label"
+                        >Meta Description
+                      </label>
+                      <textarea
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="MetaDescriptionVlaue"
+                        [class.is-valid]="
+                          newData.controls.ar_tag_text.status == 'VALID'
+                        "
+                        [class.is-invalid]="
+                          newData.controls.ar_tag_text.status == 'INVALID' &&
+                          newData.controls.ar_tag_text.touched
+                        "
+                        formControlName="ar_tag_text"
+                        value=""
+                        required
+                      ></textarea>
+
+                      <div id="" class="text-black col-md-12 fs-6" role="alert">
+                        Total characters :
+                        <span> {{ MetaDescriptionVlaue?.length || 0 }}</span>
+                      </div>
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                      <label for="formFile" class="form-label"
+                        >Choose Image</label
+                      >
+                      <input
+                        class="form-control"
+                        type="file"
+                        [class.is-valid]="
+                          newData.controls.main_img.status == 'VALID'
+                        "
+                        [class.is-invalid]="
+                          newData.controls.main_img.status == 'INVALID' &&
+                          newData.controls.main_img.touched
+                        "
+                        formControlName="main_img"
+                        accept="image/*"
+                        (change)="image($event)"
+                        id="formFile"
+                      />
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                      <label for="formFile" class="form-label"
+                        >Choose blog images</label
+                      >
+                      <input
+                        class="form-control tt"
+                        type="file"
+                        formControlName="arrayOfImages"
+                        accept="image/*"
+                        (change)="imagetwo($event)"
+                        id="formFile"
+                        multiple
+                      />
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                      <label for="validationServer04" class="form-label"
+                        >Schedule Date
+                      </label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        formControlName="schedule_date"
+                        [value]="today"
+                        [min]="minDate"
+                      />
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label for="validationServer04" class="form-label"
+                        >Schedule Time
+                      </label>
+                      <input
+                        type="time"
+                        class="form-control"
+                        formControlName="schedule_time"
+                        [value]="currentTime"
+                      />
+                    </div>
+                  </form>
+
+                  <div class="modal-footer w-100">
+                    <button
+                      type="button"
+                      (click)="addData(formData)"
+                      class="btn btnbebe w-100"
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end col -->
+          </div>
+          <!-- end row -->
+        </div>
+        <!-- container-fluid -->
+      </div>
+      <!-- End Page-content -->
+
+      <!-- <button  id="FixedDash" routerLink="/Home/en"   class="btn btnbebe ">Back To Home </button> -->
+
+      <app-footer></app-footer>
+    </div>
+    <!-- end main content-->
+  </div>
+  <!-- END layout-wrapper -->
+
+  <!-- delete Modal -->
+  <div
+    class="modal fade"
+    id="delete"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body d-flex justify-content-center">
+          <div
+            class="w-100 spinner d-flex justify-content-center align-items-center"
+            *ngIf="loadingD"
+          >
+            <app-spinner></app-spinner>
+          </div>
+          <h5 *ngIf="!loadingD" class="text-danger">
+            Are you sure to disable this
+          </h5>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            data-bs-dismiss="modal"
+            (click)="disabledData(idValue)"
+            class="btn btnbebe"
+          >
+            Disable
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- recovery Modal -->
+  <div
+    class="modal fade"
+    id="recovery"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body d-flex justify-content-center">
+          <div
+            class="w-100 spinner d-flex justify-content-center align-items-center"
+            *ngIf="loadingR"
+          >
+            <app-spinner></app-spinner>
+          </div>
+          <h5 *ngIf="!loadingR" class="text-danger">
+            Are you sure to activate this
+          </h5>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            (click)="recoveryData(idValue)"
+            class="btn btnbebe"
+          >
+            Activate
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

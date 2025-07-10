@@ -1,0 +1,344 @@
+
+<body class="">
+
+    <!-- <body data-layout="horizontal"> -->
+        <title>Ksa Student || Dashboard</title>
+
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            
+            <app-header></app-header>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content ">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <!-- <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                            <li class="breadcrumb-item active">Editable Tables</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h4 class="card-title">Blog Subcategory Page</h4>
+                                        <div class=""> 
+                                            <button class="btn btnbebe mt-2" (click)="emptyForm()"  data-bs-toggle="modal" data-bs-target="#add"   aria-hidden="true">Add</button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body"> 
+
+                                        <div class="col-md-12 d-flex justify-content-end"  *ngIf="!loading">
+
+                                    
+                                            <div class="col-md-5 dropdep" style="position: absolute; top: 5rem; display: flex;" >
+                                               
+                        
+                                                             
+                                            <span style="align-items: center; display: flex;">Categories :</span>
+   
+                                            <select id="allData" class="form-control" style="display: flex; width: 80%; margin-left: 10px;  " [(ngModel)]="selectedCategoryId" (ngModelChange)="onCategoryChange()">
+                                                <option value="selected">All</option>
+                                                <option [title]="Category.ar_title" *ngFor="let Category of CategoryAarry" [ngValue]="Category.id">{{ truncateText(Category.ar_title,60) }}</option>
+                                              </select>
+                                              
+                                            </div>
+                                        </div> 
+
+                                        <div class="w-100  spinner d-flex justify-content-center align-items-center " *ngIf="loading">
+                                            <app-spinner></app-spinner>
+                                        </div>
+
+                                       
+
+                                        <div *ngIf="showAddMSG" class="alert alert-success" role="alert" >
+                                            Data added successfully
+                                        </div>
+    
+                                        <div *ngIf="showUpdateMSG" class="alert alert-success" role="alert">
+                                            Data updated successfully
+                                        </div>
+
+                                        <div *ngIf="deleteMSG" class="alert alert-success" role="alert">
+                                            Data disabled successfully
+                                        </div>
+    
+                                        <div *ngIf="recoveryMSG" class="alert alert-success" role="alert">
+                                            Data activated successfully
+                                        </div>                                        
+    
+        
+                                        <div class="table-responsive" *ngIf="!loading"> 
+                                        <table id="datatable" class="table table-bordered table-striped dt-responsive  nowrap w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th >ID</th>
+                                                  
+                                                    <th >Title</th>
+                                                    <th >Blog Category</th>
+                                                  
+                                   
+                                                    <th class="nosort">Actions</th>
+                                                    <!-- <th>Delete</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of DataAarry; let index = index">
+                                                
+                                                    <td  style="width: 80px">{{item.id}}</td>
+                                            
+
+                                                    <td  title="{{item.ar_title}}">{{ truncateText(item.ar_title,40) }}</td>
+                                                      
+                                                    <td  title="{{item.categories?.ar_title}}">{{ truncateText(item.categories?.ar_title,60) }}</td>
+
+
+                                                    <td style="width: 100px">
+                                                        <button data-bs-toggle="modal" data-bs-target="#update" (click)="showData(item.id)" aria-hidden="true"   class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </button>
+                                                        <button *ngIf="item.status == 1 " data-bs-toggle="modal" data-bs-target="#delete" (click)="getId(item.id)"    class="btn btn-outline-secondary btn-sm ms-4 edit" >
+                                                            <i class="fa fa-remove" aria-hidden="true"></i>
+                                                        </button>
+                                                        <button *ngIf="item.status == 0 "  data-bs-toggle="modal" data-bs-target="#recovery" (click)="getId(item.id)"  class="btn btn-outline-secondary btn-sm ms-4 edit" >
+                                                            <i class="fa-solid fa-rotate-left"></i>
+                                                        </button>
+                                                    </td> 
+      
+                                                    
+                                                                     
+                                                 </tr>
+                                              
+                                              
+                                            </tbody>
+                                        </table>
+                                    </div> 
+        
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                        
+                    </div> <!-- container-fluid -->
+
+                  
+                </div>
+                <!-- End Page-content -->
+
+               
+
+            <!-- <button  id="FixedDash" routerLink="/Home/en"   class="btn btnbebe ">Back To Home </button> -->
+                
+                <app-footer></app-footer>
+            </div>
+            <!-- end main content-->
+
+                
+
+        </div>
+        <!-- END layout-wrapper -->
+
+    
+        <!-- Add Modal -->
+        <div class="modal align-items-center fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New </h5>
+                <button type="button" (click)="emptyForm()"   class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="w-100  spinner d-flex justify-content-center align-items-center " *ngIf="loadingA">
+                        <app-spinner></app-spinner>
+                    </div>
+                    <div *ngIf="showTryMSG" style="position: static !important;" class="alert alert-danger text-center" role="alert">
+                        Please try again
+                    </div>
+                    <form class="row g-3" [formGroup]="newData" *ngIf="!loadingA">
+                        <div class="col-md-12">
+                          <label for=""   class="form-label">Title</label>
+                          <input type="text" (keydown)="handleKeydown($event)" class="form-control " [class.is-valid]="newData.controls.ar_title.status == 'VALID'" 
+                          [class.is-invalid]="newData.controls.ar_title.status == 'INVALID' && newData.controls.ar_title.touched"
+                           formControlName="ar_title"  id="" value="" required>
+                         
+                        </div>
+
+                        <div id="" class="text-danger col-md-12 fs-6 " role="alert">
+                            <span  *ngIf="newData.controls.ar_title.errors?.['maxlength']"> Title must contain no more than 90 characters</span>
+                        </div>
+                        
+
+  
+                          
+
+                         
+                        
+                       
+                        
+                        <div class="col-md-12">
+                            <label for="validationServer04" class="form-label">Blog Category </label>
+                            <select  class="form-control" [class.is-valid]="newData.controls.blog_category_id.status == 'VALID'" 
+                            [class.is-invalid]="newData.controls.blog_category_id.status == 'INVALID' && newData.controls.blog_category_id.touched" 
+                             formControlName="blog_category_id"  >
+                             <option *ngFor="let category of CategoryAarry " value="{{category.id}}" > {{category.ar_title}} </option>
+                           
+                            
+                            </select>
+                        </div>
+                        
+                      
+                       
+                      </form>      
+                </div>
+
+
+                <div class="modal-footer">
+                <button type="button"  [disabled]="newData.invalid && newData.touched" (click)="addData(formData)"  class="btn btnbebe" >Add</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+         <!-- update model -->
+         <div class="modal align-items-center fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Data</h5>
+                <button type="button" (click)="emptyForm()"  class="btn-close"  data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="w-100  spinner d-flex justify-content-center align-items-center " *ngIf="loadingU">
+                        <app-spinner></app-spinner>
+                    </div>
+                    <div *ngIf="showTryMSG" style="position: static !important;" class="alert alert-danger text-center" role="alert">
+                        Please try again
+                    </div>
+                    <form class="row g-3" [formGroup]="newData" *ngIf="!loadingU">
+
+                        <div *ngIf="wrongData" class="alert alert-danger text-center" role="alert">
+                            Data invalid
+                        </div>
+
+                        <div class="col-md-12">
+                          <label for=""   class="form-label">Title</label>
+                          <input type="text" (keydown)="handleKeydown($event)" class="form-control " [class.is-valid]="newData.controls.ar_title.status == 'VALID'" 
+                          [class.is-invalid]="newData.controls.ar_title.status == 'INVALID' && newData.controls.ar_title.touched"
+                           formControlName="ar_title" [value]="ShowAarry?.ar_title"  id="" value="" required>
+                      
+                        </div>
+
+                        <div id="" class="text-danger col-md-12 fs-6 " role="alert">
+                            <span  *ngIf="newData.controls.ar_title.errors?.['maxlength']"> Title must contain no more than 90 characters</span>
+                        </div>
+                        
+
+                 
+
+
+                       
+                        
+  
+                          
+
+                    <div class="col-md-12">
+                        <label for="validationServer04" class="form-label">Blog Category </label>
+                        <select  class="form-control" [class.is-valid]="newData.controls.blog_category_id.status == 'VALID'" 
+                        [class.is-invalid]="newData.controls.blog_category_id.status == 'INVALID' && newData.controls.blog_category_id.touched" 
+                            formControlName="blog_category_id" [value]="ShowAarry?.blog_category_id" >
+                            <option *ngFor="let category of CategoryAarry" value="{{category.id}}" > {{category.ar_title}} </option>
+                        
+                        </select>
+                    </div>
+                          
+
+
+                       
+
+                          
+                                                  
+
+                       
+                      </form>     
+                </div>
+
+
+                <div class="modal-footer">
+                <button type="button" (click)="updateData(formData ,ShowAarry?.id )" class="btn btnbebe"   >Update</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- delete Modal -->
+        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center">
+                <div class="w-100  spinner d-flex justify-content-center align-items-center " *ngIf="loadingD">
+                    <app-spinner></app-spinner>
+                </div>
+                <h5  *ngIf="!loadingD" class="text-danger">Are you sure to disable this </h5>
+                </div>
+                <div class="modal-footer">
+                <button type="button" data-bs-dismiss="modal" (click)="disabledData(idValue)" class="btn btnbebe">Disable </button>
+                </div>
+            </div>
+            </div>
+        </div>
+    
+        <!-- recovery Modal -->
+        <div class="modal fade" id="recovery" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-center">
+                <div class="w-100  spinner d-flex justify-content-center align-items-center " *ngIf="loadingR">
+                    <app-spinner></app-spinner>
+                </div>
+                <h5 *ngIf="!loadingR" class="text-danger">Are you sure to activate this  </h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="recoveryData(idValue)" class="btn btnbebe">Activate </button>
+                </div>
+
+            </div>
+            </div>
+        </div>
+
+       
+
+     
+
+</body>
+
+<div class="alert  alert-danger mt-2 text-center sideRedAlert"   role="alert"   >
+    <i class=" mt-1 ms-2 me-2 fa-solid fa-circle-exclamation animate__animated animate__pulse animate__slowe animate__infinite"></i>  Loading time longer than expected.<a style="cursor:pointer  ; border-bottom: solid red 1px; font-weight: 900; margin-left: 10px;" (click)="reloadPage()">Reload</a>
+</div>

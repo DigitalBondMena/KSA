@@ -1,0 +1,258 @@
+
+<body class="">
+    <title>Ksa Student|| Dashboard</title>
+
+
+    <!-- <body data-layout="horizontal"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            
+            <app-header></app-header>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content ">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <!-- <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                            <li class="breadcrumb-item active">Editable Tables</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h4 class="card-title">Contact Information</h4>
+                                       
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="w-100  spinner d-flex justify-content-center align-items-center " *ngIf="loading">
+                                            <app-spinner></app-spinner>
+                                        </div>
+
+                                        <div *ngIf="showAddMSG" class="alert alert-success" role="alert">
+                                            Contacts  added successfully
+                                        </div>
+    
+                                        <div *ngIf="showUpdateMSG" class="alert alert-success" role="alert">
+                                            Data updated successfully
+                                        </div>
+
+
+                                        <div class="table-responsive" *ngIf="!loading">
+                                        <table id="datatable" class="table table-striped table-bordered dt-responsive  nowrap w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Address</th>
+                                                    <th>email</th>
+                                                    <th>Phone</th>
+
+                                                    
+                                                    <th class="nosort">Actions</th>
+                                                    <!-- <th>Delete</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                
+                                                    <td style="width: 80px">{{ContactusAarry.id}}</td>
+                                                    <td [title]="ContactusAarry.ar_addresses" > {{ truncateText(ContactusAarry.ar_addresses,50) }}</td>
+                                                    <td>{{ContactusAarry.website_email}}</td>
+                                                    <td>{{ContactusAarry.website_phone}}</td>
+                                                    <td style="width: 100px">
+                                                        <button data-bs-toggle="modal" data-bs-target="#update" (click)="showContactus(ContactusAarry.id)" aria-hidden="true"   class="btn btn-outline-secondary btn-sm edit" title="Edit">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </button>
+                                                    </td> 
+      
+                                                    
+                                            
+                                                 </tr>
+                                               
+
+                                                
+                                              
+                                            </tbody>
+                                        </table>
+                                    </div> 
+        
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                        
+                    </div> <!-- container-fluid -->
+
+                  
+                </div>
+                <!-- End Page-content -->
+
+               
+                <!-- <button  id="FixedDash" routerLink="/Home/en"   class="btn btnbebe ">Back To Home </button> -->
+
+                
+                <app-footer></app-footer>
+            </div>
+            <!-- end main content-->
+
+                
+
+        </div>
+        <!-- END layout-wrapper -->
+
+     
+        <!-- update model -->
+        <div class="modal align-items-center fade" id="update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Data</h5>
+                <button type="button" (click)="emptyForm()"  class="btn-close"  data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="w-100  spinner d-flex justify-content-center align-items-center " *ngIf="loadingU">
+                        <app-spinner></app-spinner>
+                    </div>
+                    <div *ngIf="showTryMSG" style="position: static !important;" class="alert alert-danger text-center" role="alert">
+                        Please try again
+                    </div>
+
+                    
+                    <div class="alert alert-danger mt-2 text-center" style="position:static"  role="alert" *ngIf="WrongLink">
+                        Link must start with HTTPS
+                    </div>
+
+                    <form class="row g-3" [formGroup]="newData" *ngIf="!loadingU">
+                        <div class="col-md-6">
+                          <label for="validationServer01"  class="form-label">Address </label>
+                          <input type="text" class="form-control " [class.is-valid]="newData.controls.ar_addresses.status == 'VALID'" 
+                          [class.is-invalid]="newData.controls.ar_addresses.status == 'INVALID' && newData.controls.ar_addresses.touched"
+                           formControlName="ar_addresses" [value]="ShowContactUs?.ar_addresses"    id="validationServer01" required>
+                         
+                        </div>
+
+                       
+
+                        <div class="col-md-6">
+                          <label for="validationServer03" class="form-label"> email</label>
+                          <input type="text" class="form-control"[class.is-valid]="newData.controls.website_email.status == 'VALID'" 
+                          [class.is-invalid]="newData.controls.website_email.status == 'INVALID' && newData.controls.website_email.touched" 
+                           formControlName="website_email" [value]="ShowContactUs?.website_email"  id="validationServer03" value="" required >
+                         
+                        </div>
+
+                     
+
+                    
+
+                        <div class="col-md-6">
+                            <label for="validationServer01"  class="form-label">Phone number</label>
+                            <input  (keypress)="isNumberKey($event)"  class="form-control " [class.is-valid]="newData.controls.website_phone.status == 'VALID'" 
+                            [class.is-invalid]="newData.controls.website_phone.status == 'INVALID' && newData.controls.website_phone.touched"
+                             formControlName="website_phone" [value]="ShowContactUs?.website_phone"   id="validationServer01" value="" required>
+                           
+                        
+                          </div>
+  
+                          <div class="col-md-6">
+                            <label for="validationServer02" class="form-label"> Location link </label>
+                            <input type="text" class="form-control" [class.is-valid]="newData.controls.map_link.status == 'VALID'" 
+                            [class.is-invalid]="newData.controls.map_link.status == 'INVALID' && newData.controls.map_link.touched" 
+                            formControlName="map_link"  [value]="ShowContactUs?.map_link" id="validationServer02" value="" required>
+                            
+
+                          </div>
+
+                          <div class="col-md-6">
+                            <label for="validationServer01"  class="form-label">Facebook link</label>
+                            <input type="text" class="form-control "[class.is-valid]="newData.controls.facebook_link.status == 'VALID'" 
+                            [class.is-invalid]="newData.controls.facebook_link.status == 'INVALID' && newData.controls.facebook_link.touched" 
+                            formControlName="facebook_link"  [value]="ShowContactUs?.facebook_link" id="validationServer02" > 
+                           
+                          </div>
+  
+                          <div class="col-md-6">
+                            <label for="validationServer01"  class="form-label">Instagrm link</label>
+                            <input type="text" class="form-control "  [class.is-valid]="newData.controls.instagrm_link.status == 'VALID'" 
+                            [class.is-invalid]="newData.controls.instagrm_link.status == 'INVALID' && newData.controls.instagrm_link.touched" 
+                            formControlName="instagrm_link" [value]="ShowContactUs?.instagrm_link" >
+                           
+                          </div>
+
+                          <div class="col-md-6">
+                            <label for="validationServer01"  class="form-label">X link</label>
+                            <input type="text" class="form-control " [class.is-valid]="newData.controls.tweet_link.status == 'VALID'" 
+                            [class.is-invalid]="newData.controls.tweet_link.status == 'INVALID' && newData.controls.tweet_link.touched" 
+                            formControlName="tweet_link" [value]="ShowContactUs?.tweet_link">
+                           
+                          </div>
+
+
+                          <div class="col-md-6">
+                            <label for="validationServer01"  class="form-label">linkedin link</label>
+                            <input type="text" class="form-control "  [class.is-valid]="newData.controls.linkedIn_link.status == 'VALID'" 
+                            [class.is-invalid]="newData.controls.linkedIn_link.status == 'INVALID' && newData.controls.linkedIn_link.touched" 
+                            formControlName="linkedIn_link" [value]="ShowContactUs?.linkedIn_link">            
+                          </div>
+
+                          <div class="col-md-6">
+                            <label for="validationServer01"  class="form-label">Snapchat link</label>
+                            <input type="text" class="form-control "  [class.is-valid]="newData.controls.snapchat_link.status == 'VALID'" 
+                            [class.is-invalid]="newData.controls.snapchat_link.status == 'INVALID' && newData.controls.snapchat_link.touched" 
+                            formControlName="snapchat_link" [value]="ShowContactUs?.snapchat_link">            
+                          </div>
+
+                          <div class="col-md-6">
+                            <label for="validationServer01"  class="form-label">Telegram link</label>
+                            <input type="text" class="form-control "  [class.is-valid]="newData.controls.telegram_link.status == 'VALID'" 
+                            [class.is-invalid]="newData.controls.telegram_link.status == 'INVALID' && newData.controls.telegram_link.touched" 
+                            formControlName="telegram_link" [value]="ShowContactUs?.telegram_link">            
+                          </div>
+
+                        
+                       
+
+                      
+                       
+                      </form>    
+                </div>
+
+
+                <div class="modal-footer">
+                <button type="button" [disabled]="newData.invalid"   (click)="updateFunction(formData , ShowContactUs?.id )" class="btn btnbebe"   >Update</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    
+
+
+  
+
+     
+
+</body>
+<div class="alert  alert-danger mt-2 text-center sideRedAlert"   role="alert"   >
+    <i class=" mt-1 ms-2 me-2 fa-solid fa-circle-exclamation animate__animated animate__pulse animate__slowe animate__infinite"></i>  Loading time longer than expected.<a style="cursor:pointer  ; border-bottom: solid red 1px; font-weight: 900; margin-left: 10px;" (click)="reloadPage()">Reload</a>
+</div>

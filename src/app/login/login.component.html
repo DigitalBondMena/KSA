@@ -1,0 +1,95 @@
+
+        <div class="auth-page">
+            <div class="container-fluid p-0">
+                <div class="row g-0 justify-content-center align-items-center">
+                    <div class="col-xxl-6 col-lg-6 col-md-6 col-8 ">
+                        <div class="auth-full-page-content d-flex p-sm-5 p-4">
+                            <div class="w-100">
+                                <div class="d-flex flex-column h-100">
+                                    <!-- <div class="mb-1 mb-md-1 text-center">
+                                        <a  class="d-block auth-logo">
+                                         
+                                        </a>
+                                    </div> -->
+                                    <div class="auth-content my-auto p-3 shadow-lg rounded-4 ">
+                                        <div class="text-center  d-flex justify-content-between align-items-center">
+                                           
+                                            <img src="assets/Logo.png" width="120px" alt="" > 
+
+                                            <div class="t">
+                                                <h5 class="mb-0">Welcome Back !</h5>
+                                                <p class="text-muted mt-2">Sign in to KSA Student Dashboard.</p>
+                                            </div>
+                                        </div>
+                                        <form class="mt-4 pt-2"  [formGroup]="LoginForm">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email </label>
+                                                <input type="email" formControlName="email" class="form-control" id="username" placeholder="Enter username">
+                                         
+                                                <div class="alertx">                                               
+                                                    <div id="requiredEmail" class="text-danger   fs-6 " role="alert">
+                                                        <p class="" *ngIf="LoginForm.controls.email.errors?.['required'] && LoginForm.controls.email.touched">Email is required</p>
+                                                    </div>
+                                                    
+                                                    <div id="emailAlert" class="text-danger  fs-6 " role="alert">
+                                                        <p class="" *ngIf="LoginForm.controls.email.errors?.['email']"> It must contain @ and . </p>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <div class="d-flex align-items-start">
+                                                    <div class="flex-grow-1">
+                                                        <label class="form-label">Password</label>
+                                                    </div>
+                                                  
+                                                </div>
+                                                
+                                                <div class="input-group auth-pass-inputgroup">
+                                                    <input type="password"  formControlName="password"  class="form-control" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon">
+                                                    <!-- <button class="btn btn-light shadow-none ms-0" type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button> -->
+                                             
+                                                </div>
+
+                                                <div class=" alertx">
+                                                    <div  class="text-danger  fs-6 " role="alert">
+                                                        <p id="" class="" *ngIf="LoginForm.controls.password.errors?.['required'] && LoginForm.controls.password.touched">Password is required</p>
+                                                    </div>
+                                                 
+                                                </div>
+
+                                            </div>
+
+                                            <div class="remember-me " style="flex-direction: row-reverse;">
+                                              
+                                                <input type="checkbox" (click)="rememberMe()" password="radio">
+                                                <span class="checkmark"></span>
+                                                <label class="custom_check  mb-0 d-inline-flex remember-me ms-2"> remember me
+                                                
+                                                </label>
+                                            </div>
+                                           
+                                            <div class="mb-3">
+                                                <button class="btn bg-green w-100 waves-effect waves-light" (click)="Login(LoginForm.value)" type="submit">Log In</button>
+                                            </div>
+                                        </form>
+
+                                     
+                                        <div class="alert alert-danger mt-2 text-center" style="position: static !important;"   role="alert" *ngIf="redAlert">
+                                            Password or Email Is Not Correct
+                                        </div>
+            
+                                       
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end auth full page content -->
+                    </div>
+                  
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container fluid -->
+        </div> 

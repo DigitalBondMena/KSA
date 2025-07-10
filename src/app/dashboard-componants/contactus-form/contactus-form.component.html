@@ -1,0 +1,156 @@
+
+<body class="">
+    <title>Ksa Student|| Dashboard</title>
+
+
+    <!-- <body data-layout="horizontal"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            
+            <app-header></app-header>
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="main-content ">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <!-- <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
+                                            <li class="breadcrumb-item active">Editable Tables</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <h4 class="card-title">Contact Forms Page</h4>
+                                       
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="w-100  spinner d-flex justify-content-center align-items-center " *ngIf="loading">
+                                            <app-spinner></app-spinner>
+                                        </div>
+        
+                                        <div class="table-responsive" *ngIf="!loading"> 
+                                        <table id="datatable" class="table table-bordered table-striped dt-responsive  nowrap w-100">
+                                            <thead>
+                                                <tr >
+                                                    <th>ID</th>
+                                                    <th>Date</th>
+                                                    <th>Name</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Email</th>
+                                                    <th class="nosort">Actions</th>
+                                                    
+                                                    <!-- <th>Delete</th> -->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                              
+                                                    
+                                            
+                                                
+                                                 <tr *ngFor="let item of DataArray ; let index = index">
+
+                                                    <td style="width: 80px">{{item.id}}</td>
+                                                    <td style="width: 80px">{{item.created_at}}</td>
+                                                    <td [title]="item.name"> {{ truncateText(item.name,30)}}</td>
+                                                    <td [title]="item.phone" >{{item.phone}}</td> 
+                                                    <td  [title]="item.email" > {{ truncateText(item.email,50)}}</td> 
+                                                    <td style="width: 100px">
+                                                    <button data-bs-toggle="modal" data-bs-target="#view" (click)="showData(item.id)"  class="btn btn-outline-secondary btn-sm ms-4 edit" >
+                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    </button>
+                                                    </td> 
+      
+                                                 </tr>
+
+                                                 
+                                              
+                                            </tbody>
+                                        </table>
+                                    </div> 
+        
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div> <!-- end row -->
+                        
+                    </div> <!-- container-fluid -->
+
+                  
+                </div>
+                <!-- End Page-content -->
+                <!-- <button  id="FixedDash" routerLink="/Home/en"   class="btn btnbebe ">Back To Home </button> -->
+
+               
+
+                
+                <app-footer></app-footer>
+            </div>
+            <!-- end main content-->
+
+                
+
+        </div>
+        <!-- END layout-wrapper -->
+
+     
+
+     <!-- delete Modal -->
+     <div class="modal fade" id="view" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content overflow-hidden">
+            <div class="modal-header">
+            
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="w-100  spinner d-flex justify-content-center align-items-center " *ngIf="loading2">
+                <app-spinner></app-spinner>
+            </div>
+
+            <div class="modal-body row justify-content-center align-items-center " *ngIf="!loading2" >
+                <p  class="col-md-6" style=" display: flex; justify-content: center; align-items: center ;  border: 0.5px solid black; max-height: 70px; min-height: 70px; overflow: auto; " >ID : <span class="ms-2"> {{ShowArray?.id}}</span></p>
+                <p  class="col-md-6" style=" display: flex; justify-content: center; align-items: center ;  border: 0.5px solid black; max-height: 70px; min-height: 70px; overflow: auto; "  >Date : <span class="ms-2"> {{ShowArray?.created_at}}</span></p>
+                <p  class="col-md-6" style=" display: flex; justify-content: center; align-items: center ;  border: 0.5px solid black; max-height: 70px; min-height: 70px; overflow: auto; "  >Name : <span class="ms-2">{{ShowArray?.name}}</span></p>
+                <p  class="col-md-6" style=" display: flex; justify-content: center; align-items: center ;  border: 0.5px solid black; max-height: 70px; min-height: 70px; overflow: auto; "  >Phone Number : <span class="ms-2"> {{ShowArray?.phone}}</span></p>
+                <p  class="col-md-6" style=" display: flex; justify-content: center; align-items: center ;  border: 0.5px solid black; max-height: 70px; min-height: 70px; overflow: auto; "  >Email : <span class="ms-2"> {{ShowArray?.email}}</span></p>
+                <p  class="col-md-6" style=" display: flex; justify-content: center; align-items: center ;  border: 0.5px solid black; max-height: 70px; min-height: 70px; overflow: auto; "  >Message : <span class="ms-2">{{ShowArray?.message}}</span></p>
+               
+            </div>
+
+
+
+            <div class="modal-footer">
+            <button type="button" data-bs-dismiss="modal" class="btn btnbebe">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+     
+
+</body>
+
+
+<div class="alert  alert-danger mt-2 text-center sideRedAlert"   role="alert"   >
+    <i class=" mt-1 ms-2 me-2 fa-solid fa-circle-exclamation animate__animated animate__pulse animate__slowe animate__infinite"></i>  Loading time longer than expected.<a style="cursor:pointer  ; border-bottom: solid red 1px; font-weight: 900; margin-left: 10px;" (click)="reloadPage()">Reload</a>
+</div>

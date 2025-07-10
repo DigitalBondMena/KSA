@@ -1,0 +1,328 @@
+<body>
+  <header id="page-topbar">
+    <div class="navbar-header">
+      <div class="d-flex">
+        <!-- LOGO -->
+        <div class="navbar-brand-box" id="t">
+          <a routerLink="/Home-dash" class="logo logo-dark">
+            <span class="logo-sm">
+              <img
+                src="assets/Logo.png"
+                alt=""
+                style="width: 50px; height: 50px"
+              />
+            </span>
+            <span class="logo-lg">
+              <img
+                src="assets/Logo.png "
+                alt=""
+                style="width: 160px; height: 75px"
+              />
+              <!-- <span class="logo-txt">15 May</span> -->
+            </span>
+          </a>
+
+          <a routerLink="/Home-dash" class="logo logo-light">
+            <span class="logo-sm">
+              <img
+                src="assets/Logo.png"
+                alt=""
+                style="width: 50px; height: 50px"
+              />
+            </span>
+            <span class="logo-lg">
+              <img
+                src="assets/Logo.png "
+                alt=""
+                style="width: 160px; height: 75px"
+              />
+              <!-- <span class="logo-txt">15 May</span> -->
+            </span>
+          </a>
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-sm px-3 font-size-16 header-item"
+          id="vertical-menu-btn"
+        >
+          <i class="fa fa-fw fa-bars"></i>
+        </button>
+      </div>
+
+      <div class="d-flex">
+        <div class="dropdown d-inline-block">
+          <button
+            type="button"
+            class="btn header-item topbar-light bg-light-subtle border-start"
+            id="page-header-user-dropdown"
+            data-bs-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <!-- <img class="rounded-circle header-profile-user" *ngIf="user_image != null" src="{{userSrc+user_image}}"> -->
+            <img
+              class="rounded-circle header-profile-user"
+              style="background-color: transparent"
+              src="assets/Logo.png"
+            />
+
+            <span class="d-xl-inline-block ms-1 fw-medium"
+              >{{ user_name }}
+            </span>
+            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end">
+            <!-- item-->
+            <div class="dropdown-divider"></div>
+            <a
+              class="dropdown-item d-flex justify-content-between"
+              (click)="logOut()"
+            >
+              <span> Logout </span>
+              <i class="fa-solid fa-right-from-bracket mt-1"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== Left Sidebar Start ========== -->
+  <div class="vertical-menu">
+    <div data-simplebar class="h-100 overflow-auto">
+      <!--- Sidemenu -->
+      <div id="sidebar-menu">
+        <!-- Left Menu Start -->
+        <ul class="metismenu list-unstyled" id="side-menu">
+          <!-- <li>
+                        <a routerLink="/Home/ar">
+
+                            <i class="fa-solid fa-circle-left"></i>
+                            <span data-key="t-dashboard">Website</span>
+                        </a>
+                    </li> -->
+
+          <li class="menu-title" data-key="t-menu">Control</li>
+
+          <li>
+            <a routerLink="/dashboard-home">
+              <i class="fa fa-dashboard"></i>
+              <span data-key="t-dashboard">Home</span>
+            </a>
+          </li>
+          <li (click)="updateSiteMap()">
+            <a>
+              <i class="fa-solid fa-sitemap"></i>
+              <span data-key="t-calendar">Update SiteMap</span>
+            </a>
+          </li>
+          <li>
+            <a class="has-arrow">
+              <i class="fa-solid fa-house-user"></i>
+              <span data-key="t-dashboard">
+                Home Edit
+                <i class="fa-solid fa-angle-down down"></i>
+              </span>
+            </a>
+
+            <ul class="sub-menu" aria-expanded="false">
+              <li>
+                <a routerLink="/home-slider">
+                  <span data-key="t-calendar">Home Slider </span>
+                </a>
+              </li>
+
+              <li>
+                <a routerLink="/home-specialties">
+                  <span data-key="t-calendar">Home specialties</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a class="" routerLink="/about">
+              <i class="fa-solid fa-eject"></i>
+              <span data-key="t-dashboard">About</span>
+            </a>
+          </li>
+          <li>
+            <a class="" routerLink="/vision">
+              <i class="fa-solid fa-chess-queen"></i>
+              <span data-key="t-dashboard">2030 Vision </span>
+            </a>
+          </li>
+
+          <li>
+            <a class="" routerLink="/human-resource">
+              <i class="fa-solid fa-person-shelter"></i>
+              <span data-key="t-dashboard">Human Resource </span>
+            </a>
+          </li>
+
+          <li>
+            <a class="" routerLink="/entrepreneurship">
+              <i class="fa-solid fa-house-laptop"></i>
+              <span data-key="t-dashboard">Entrepreneurship </span>
+            </a>
+          </li>
+
+          <li>
+            <a class="" routerLink="/study-aboard">
+              <i class="fa-solid fa-building-columns"></i>
+              <span data-key="t-dashboard">Study Aboard </span>
+            </a>
+          </li>
+
+          <li>
+            <a class="has-arrow">
+              <i class="fa-solid fa-viruses"></i>
+              <span data-key="t-dashboard"
+                >Manage Blogs
+                <i class="fa-solid fa-angle-down down"></i>
+              </span>
+            </a>
+
+            <ul class="sub-menu" aria-expanded="false">
+              <li>
+                <a routerLink="/category">
+                  <span data-key="t-calendar"> Manage Categories</span>
+                </a>
+              </li>
+
+              <li>
+                <a routerLink="/sub-categories">
+                  <span data-key="t-calendar">Manage Subcategories</span>
+                </a>
+              </li>
+              <li>
+                <a routerLink="/blogs">
+                  <span data-key="t-calendar">Blogs</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- stop here -->
+
+          <li>
+            <a routerLink="/contactus-page">
+              <i class="fa-solid fa-phone-volume"></i>
+              <span data-key="t-dashboard">Contact us</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="has-arrow">
+              <i class="fa-brands fa-slack"></i>
+              <span data-key="t-dashboard"
+                >Course
+                <i class="fa-solid fa-angle-down down"></i>
+              </span>
+            </a>
+
+            <ul class="sub-menu" aria-expanded="false">
+              <li>
+                <a routerLink="/educational-courses">
+                  <span data-key="t-calendar">Course Edit</span>
+                </a>
+              </li>
+
+              <li>
+                <a routerLink="/courses-form">
+                  <span data-key="t-calendar">Course forms</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- stop here -->
+
+          <li>
+            <a routerLink="/ksa-jobs">
+              <i class="fa-solid fa-briefcase"></i>
+              <span data-key="t-dashboard">Ksa Jobs</span>
+            </a>
+          </li>
+
+          <li>
+            <a class="has-arrow">
+              <i class="fa-solid fa-file-signature"></i>
+              <span data-key="t-dashboard"
+                >Forms
+                <i class="fa-solid fa-angle-down down"></i>
+              </span>
+            </a>
+
+            <ul class="sub-menu" aria-expanded="false">
+              <li>
+                <a routerLink="/contactus-form">
+                  <span data-key="t-calendar">Contact Form</span>
+                </a>
+              </li>
+
+              <li>
+                <a routerLink="/admission-form">
+                  <span data-key="t-calendar">Addmission Form</span>
+                </a>
+              </li>
+
+              <li>
+                <a routerLink="/become-advisor-form">
+                  <span data-key="t-calendar">Become Advisor Form</span>
+                </a>
+              </li>
+
+              <li>
+                <a routerLink="/support-form">
+                  <span data-key="t-calendar">Support Ksa Form</span>
+                </a>
+              </li>
+
+              <li>
+                <a routerLink="/opinion-form">
+                  <span data-key="t-calendar">Opinions Form</span>
+                </a>
+              </li>
+
+              <li>
+                <a routerLink="/advice-form">
+                  <span data-key="t-calendar">Advice Form</span>
+                </a>
+              </li>
+
+              <li>
+                <a routerLink="/jobs-form">
+                  <span>Ksa Job Form</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- stop here -->
+
+          <li>
+            <a routerLink="/video-library">
+              <i class="fa-solid fa-photo-film"></i>
+              <span data-key="t-dashboard">Video library </span>
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/holidays">
+              <i class="fa-solid fa-calendar"></i>
+              <span data-key="t-dashboard">Holidays</span>
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/seo-tags">
+              <i class="fa-solid fa-file-invoice"></i>
+              <span data-key="t-dashboard">Seo Tags</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- Sidebar -->
+    </div>
+  </div>
+  <!-- Left Sidebar End -->
+</body>
