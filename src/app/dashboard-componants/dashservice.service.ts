@@ -519,7 +519,15 @@ export class DashserviceService {
 
   updateSiteMap(): Observable<any> {
     return this._HttpClient.get(
-      'https://ksa-students.com/stiemapupdate/updatesitemap'
+      'https://ksa-students.com/stiemanewv/updatesitemap'
+    );
+  }
+
+  searchInBlogs(blog_title: string): Observable<any> {
+    return this._HttpClient.post(
+      'https://ksa-students.com/ksastudentsMopileApp/api/searchInBlogs' +
+        `?blog_title=${blog_title}`,
+      {}
     );
   }
 }

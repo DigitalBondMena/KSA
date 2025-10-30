@@ -16,7 +16,6 @@
             <div class="col-12">
               <div class="card">
                 <div
-                  *ngIf="!search"
                   class="card-header d-flex justify-content-between align-items-center"
                 >
                   <h4 class="card-title">Blogs Page</h4>
@@ -33,11 +32,26 @@
                     <!-- <button class="btn btnbebe mt-2" (click)="emptyForm()"  data-bs-toggle="modal" data-bs-target="#add"   aria-hidden="true">Add</button> -->
                   </div>
                 </div>
+
                 <div
-                  *ngIf="search"
-                  class="card-header d-flex justify-content-between align-items-center"
+                  class="search-container d-flex justify-content-between m-3 gap-2"
                 >
-                  <h4 class="card-title">Search Blogs</h4>
+                  <input
+                    type="text"
+                    class="form-control w-100 p-2"
+                    placeholder="Search for all blogs"
+                    [(ngModel)]="searchKey"
+                  />
+                  <button
+                    [disabled]="searchKey.length < 8"
+                    class="btn btnbebe"
+                    (click)="searchBlogs()"
+                  >
+                    Search
+                  </button>
+                  <button class="btn btn-danger" (click)="resetSearch()">
+                    Reset
+                  </button>
                 </div>
                 <div class="card-body">
                   <!-- <div class="row" style="  position: absolute;right: 25px; top: 5rem; z-index: 555; " *ngIf="!all">
@@ -117,104 +131,6 @@
                   </div>
 
                   <div class="position-relative">
-                    <!-- pagination -->
-                    <div *ngIf="hidden">
-                      navigation
-                      <nav
-                        aria-label="Page navigation example"
-                        style="
-                          position: absolute;
-                          bottom: -17px;
-                          right: 18px;
-                          z-index: 99;
-                          height: auto !important;
-                        "
-                        *ngIf="!loading"
-                      >
-                        <ul class="pagination p-0 d-flex" *ngIf="all">
-                          <li class="page-item">
-                            <button
-                              class="page-link"
-                              [disabled]="currentPage == 1"
-                              (click)="back()"
-                            >
-                              Previous
-                            </button>
-                          </li>
-                          <li class="page-item">
-                            <button
-                              class="page-link"
-                              *ngIf="currentPage != 1"
-                              (click)="first()"
-                            >
-                              1
-                            </button>
-                          </li>
-                          <li class="page-item">
-                            <button
-                              class="page-link"
-                              *ngIf="currentPage != 1"
-                              [disabled]="true"
-                            >
-                              ...
-                            </button>
-                          </li>
-
-                          <li class="page-item">
-                            <a class="page-link active"> {{ currentPage }}</a>
-                          </li>
-                          <li class="page-item">
-                            <button
-                              class="page-link"
-                              *ngIf="currentPage != lastPage"
-                              [disabled]="true"
-                            >
-                              ...
-                            </button>
-                          </li>
-
-                          <li class="page-item">
-                            <button
-                              class="page-link"
-                              *ngIf="currentPage != lastPage"
-                              (click)="last()"
-                            >
-                              {{ lastPage }}
-                            </button>
-                          </li>
-
-                          <li class="page-item">
-                            <button
-                              class="page-link"
-                              [disabled]="currentPage == lastPage"
-                              (click)="next()"
-                            >
-                              Next
-                            </button>
-                          </li>
-                        </ul>
-                      </nav>
-
-                      <!-- show_filter -->
-                      <select
-                        class="show_filter form-control form-input"
-                        style="
-                          cursor: pointer;
-                          width: 100px;
-                          height: 40px;
-                          position: absolute;
-                          bottom: 0px;
-                          left: 30px;
-                          z-index: 22;
-                        "
-                        (change)="onSelectChange($event)"
-                      >
-                        <option value="10">10</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                        <option value="الكل">الكل</option>
-                      </select>
-                    </div>
                     <div class="table-responsive" *ngIf="!loading">
                       <table
                         id="datatable"

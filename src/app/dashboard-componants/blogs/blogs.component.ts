@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import 'datatables.net';
@@ -10,9 +10,7 @@ import { DashserviceService } from '../dashservice.service';
   templateUrl: './blogs.component.html',
   styleUrls: ['./blogs.component.css'],
 })
-export class BlogsComponent implements OnInit {
-  @Input() search: boolean = false;
-
+export class BlogsComponent implements OnInit, OnDestroy {
   constructor(
     private _Dashservice: DashserviceService,
     private _Router: Router
@@ -824,5 +822,122 @@ export class BlogsComponent implements OnInit {
     if (this.CategoryFilterBySub.length >= 0) {
       this.noSub = false;
     }
+  }
+
+  // ------------------------------- Human resource----------------------------------
+
+  searchKey: string = '';
+  searchBlogs(): void {
+    const value = this.searchKey.trim();
+
+    // Clear any existing timeout to implement debouncing
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
+
+    // Minimum search length validation
+    if (value && value.length < 8) {
+      return;
+    }
+    // Debounce search requests
+    this.searchTimeout = setTimeout(() => {
+      this.performSearch(value);
+    }, 300);
+  }
+
+  resetSearch() {
+    this.searchKey = '';
+    this.getData();
+  }
+  private searchTimeout: any;
+
+  private performSearch(searchTerm: string): void {
+    if (!searchTerm || searchTerm.length === 0) {
+      this.getData();
+      return;
+    }
+
+    this.loading = true;
+    this.showTryMSG = false;
+
+    this._Dashservice.searchInBlogs(searchTerm).subscribe({
+      next: (res) => {
+        this.loading = false;
+
+        if (
+          res?.data?.data &&
+          Array.isArray(res.data.data) &&
+          res.data.data.length > 0
+        ) {
+          this.DataAarry = res.data.data;
+          this.currentPage = res.data.current_page || 1;
+          this.lastPage = res.data.last_page || 1;
+          this.perPage = res.data.per_page || this.DataAarry.length;
+
+          // Update DataTable if needed
+          setTimeout(() => {
+            this.updateDataTable();
+          });
+        } else {
+          // No results found
+          this.DataAarry = [];
+          this.showNoResultsMessage();
+        }
+      },
+      error: (error) => {
+        this.loading = false;
+        this.handleSearchError(error);
+      },
+    });
+  }
+
+  private updateDataTable(): void {
+    try {
+      // Destroy existing DataTable if it exists
+      if ($.fn.DataTable.isDataTable('#datatable')) {
+        $('#datatable').DataTable().destroy();
+      }
+
+      // Reinitialize DataTable
+      $('#datatable').DataTable({
+        order: [[0, 'desc']],
+        dom: 'lfrtip',
+      });
+
+      $('.dataTables_length select').addClass('form-select form-select-sm');
+    } catch (error) {
+      console.error('Error updating DataTable:', error);
+    }
+  }
+
+  private showNoResultsMessage(): void {
+    // You can implement a proper no results UI state here
+    // For now, we'll just show an empty array
+    setTimeout(() => {
+      this.updateDataTable();
+    });
+  }
+
+  private handleSearchError(error: any): void {
+    console.error('Search error:', error);
+    this.showTryMSG = true;
+
+    // Optionally show a user-friendly error message
+    if (error.status === 429 || error.status === 0) {
+      setTimeout(() => {
+        this.showTryMSG = false;
+      }, 5000);
+    }
+  }
+
+  // Cleanup method - should be called in ngOnDestroy
+  private cleanup(): void {
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.cleanup();
   }
 }
