@@ -34,7 +34,7 @@
               "node_modules/@fortawesome/fontawesome-free/js/all.min.js",
               "node_modules/intl-tel-input/build/js/intlTelInput.min.js",
               "node_modules/metismenu/dist/metisMenu.min.js",
-              "../NodeJs files/JSFILE/app.js",
+              "NodeJs files/JSFILE/app.js",
               "node_modules/datatables.net/js/jquery.dataTables.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]

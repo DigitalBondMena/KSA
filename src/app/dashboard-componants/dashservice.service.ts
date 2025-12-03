@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class DashserviceService {
   constructor(private _HttpClient: HttpClient) {}
 
-  apiUrl: any = 'https://ksa-students.com/ksastudentsMopileApp/api/';
+  apiUrl: any = 'https://ksatest.ksa-students.com/api/';
 
   // ------------------------------- Human resource----------------------------------
   CreateAdmin(form: any): Observable<any> {
@@ -525,7 +525,7 @@ export class DashserviceService {
 
   searchInBlogs(blog_title: string): Observable<any> {
     return this._HttpClient.post(
-      'https://ksa-students.com/ksastudentsMopileApp/api/searchInBlogs' +
+      'https://ksatest.ksa-students.com/api/searchInBlogs' +
         `?blog_title=${blog_title}`,
       {}
     );

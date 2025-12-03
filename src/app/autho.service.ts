@@ -9,7 +9,7 @@ export class AuthoService {
 
   constructor(private _HttpClient:HttpClient) { }
 
-  apiUrl:any='https://ksa-students.com/ksastudentsMopileApp/api/'
+  apiUrl:any='https://ksatest.ksa-students.com/api/'
 
   login = new BehaviorSubject(false)
 
